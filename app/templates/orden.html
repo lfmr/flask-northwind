@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orden {{id}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar sticky-top navbar-light bg-light">
+    <a class="navbar-brand" href="/">Northwind | Ordenes</a>
+</nav>
+<div class="container">
+    <form action="modificar" method="post">
+        <label for="id">Orden ID</label>
+        <input type="text" id="id"  value="{{id}}" class="form-control">
+        <label for="employee_id" class="mx-1">Empleado</label>
+        <select id="employee_id" name="employee_id" class="custom-select custom-select-sm" value="{{orden.employee_id}}">
+            <option selected  hidden></option>
+            {% for empleado in empleados%}
+            <option value="{{empleado.id}}"
+                    {% if orden.employee_id == empleado.id%}
+                    selected="selected"
+                    {% endif%}
+            >{{empleado.last_name}} {{empleado.first_name}}</option>
+            {% endfor %}
+        </select>
+        <label for="customer_id" class="mx-1">Cliente</label>
+        <select id="customer_id" name="customer_id" class="custom-select custom-select-sm " value="{{orden.customer_id}}">
+            <option></option>
+            {% for cliente in clientes%}
+            <option value="{{cliente.id}}"
+                     {% if orden.customer_id == cliente.id%}
+                    selected="selected"
+                    {% endif%}
+            >[{{cliente.company}}] - {{cliente.last_name}}
+                {{cliente.first_name}}
+            </option>
+            {% endfor %}
+        </select>
+        <label>Embarcacion</label>
+        <input type="text" value="{{orden.ship_name}}" name="ship_name" class="form-control">
+        <label>Pais</label>
+        <input type="text" value="{{orden.ship_country_region}}" name="ship_country_region" class="form-control">
+        <label>Ciudad</label>
+        <input type="text" value="{{orden.ship_city}}" name="ship_city" class="form-control">
+        <label>Direccion</label>
+        <input type="text" value="{{orden.ship_address}}" name="ship_address" class="form-control">
+        <label>Tipo de pago</label>
+        <input type="text" value="{{orden.payment_type}}" class="form-control">
+        <hr>
+        <a href="/" class="btn btn-secondary float-left">Regresar</a>
+        <a href="eliminar" class="btn btn-danger float-right">Eliminar</a>
+        <button type="submit" class="btn btn-primary float-right mx-2">Modificar</button>
+    </form>
+</div>
+</body>
+</html>

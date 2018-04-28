@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Northwind | Ordenes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar sticky-top navbar-light bg-light">
+    <a class="navbar-brand" href="/">Northwind | Ordenes</a>
+    <form class="form-inline my-2 my-lg-0" action="/">
+        <label for="id" class="mr-1">ID</label>
+        <input type="text" name="id" class="form-control form-control-sm" id="id" placeholder="Orden ID">
+        <label for="employee_id" class="mx-1">Empleado</label>
+        <select id="employee_id" name="employee_id" class="custom-select custom-select-sm w-25 ">
+            <option></option>
+            {% for empleado in empleados%}
+            <option value="{{empleado.id}}">{{empleado.last_name}} {{empleado.first_name}}</option>
+            {% endfor %}
+        </select>
+        <label for="customer_id" class="mx-1">Cliente</label>
+        <select id="customer_id" name="customer_id" class="custom-select custom-select-sm w-25">
+            <option></option>
+            {% for cliente in clientes%}
+            <option value="{{cliente.id}}">[{{cliente.company}}] - {{cliente.last_name}}
+                {{cliente.first_name}}
+            </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-inline btn-sm btn-primary">Buscar</button>
+    </form>
+</nav>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Empleado</th>
+            <th>Embarcacion</th>
+            <th>Pais</th>
+            <th>Ciudad</th>
+            <th>Direccion</th>
+            <th>Tipo de pago</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for orden in ordenes%}
+        <tr>
+            <td>
+                <a href="/orden/{{orden.id}}/">{{orden.id}}</a>
+                <!--{{orden.id}}-->
+            </td>
+            <td>{{orden.customer_name}}</td>
+            <td>{{orden.employee_name}}</td>
+            <td>{{orden.ship_name}}</td>
+            <td>{{orden.ship_country_region}}</td>
+            <td>{{orden.ship_city}}</td>
+            <td>{{orden.ship_address}}</td>
+            <td>{{orden.payment_type}}</td>
+            <!--<td>{{orden}}</td>-->
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
